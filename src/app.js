@@ -5,11 +5,15 @@ const productoRoutes = require('./routes/producto.routes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors());//ahí va la url de firebase de hosting, entre otros
 app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('API backendUpb funcionando');
+});
+
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok' });
 });
 
 app.use('/api/productos', productoRoutes);

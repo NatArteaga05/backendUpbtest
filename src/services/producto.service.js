@@ -7,7 +7,12 @@ const validarId = (id) => {
     return numero;
 };
 
-const listar = () => productoRepository.findAll();
+const listar = (nombre) => {
+    if (nombre !== undefined && typeof nombre !== 'string') {
+        throw new HttpError(400, 'El filtro nombre debe ser un texto');
+    }
+    return productoRepository.findAll(nombre?.trim());
+};
 
 const obtenerPorId = async (id) => {
     const producto = await productoRepository.findById(validarId(id));
